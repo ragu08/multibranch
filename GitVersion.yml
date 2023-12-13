@@ -1,0 +1,21 @@
+mode: Mainline
+branches:
+  feature:
+    regex: ^feature?[/-]
+    source-branches: ['development']
+    tag:
+  fix:
+    regex: bugfix(es)?[/-]
+    source-branches: ['development']
+    tag:
+  development:
+    regex: ^dev(elop)?(ment)?$
+    source-branches: ['main', 'master', 'release']
+    tag: QA_V-{version}
+  release:
+    regex: ^release?[/-]
+    source-branches: ['develop', 'main', 'master']
+    tag: Release_V-{version}
+ignore:
+  sha: []
+merge-message-formats: {}
