@@ -16,9 +16,9 @@ pipeline {
             }
         }
 
-        stage('master') {
+        stage('main') {
             when {
-                branch "master"
+                branch "main"
             }
 
             steps {
@@ -33,7 +33,7 @@ pipeline {
 
                 '''
 
-                echo "This is MASTER Branch"
+                echo "This is MAIN Branch"
                 script {
 
                     def props = readProperties file: 'gitversion.properties'
