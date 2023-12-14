@@ -143,6 +143,49 @@ pipeline {
             }
         }
 
+        stage('Office 365 Notification') {
+            when {
+                branch "development"
+            }
+            steps {
+                script {
+                    // Get build information
+                    def buildNumber = env.BUILD_NUMBER
+                    def buildStatus = currentBuild.currentResult ?: 'UNKNOWN'
+
+                    // Use the git step to get the committer's name
+                    def committerName = sh(script: 'git log -1 --pretty=format:%an', returnStdout: true).trim() ?: 'Unknown Committer'
+
+                    // Build remarks based on start time
+                    def remarks = "Started Jenkins pipeline by ${JENKINS_USERNAME}"
+
+
+
+                    // Get webhook URL from secret using withCredentials
+                    def webhookUrl
+                    withCredentials([string(credentialsId: 'FERTECH-CICD', variable: 'WEBHOOK_URL')]) {
+                        webhookUrl = env.WEBHOOK_URL
+                    }
+
+                    // Format message for Teams
+                    def teamsMessage = """
+                    Latest status of build #${buildNumber}
+                    **Status:** BUILD ${buildStatus}
+                    **Remarks:** ${remarks}
+                    **Committers:** ${committerName}
+                    **Developers:** ${committerName}
+                    """
+
+                    // Send message to Office 365 using webhook URL
+                    office365ConnectorSend message: teamsMessage.trim(),
+                    //status: 'SUCCESS', // Specify the status for success
+                    webhookUrl: webhookUrl // Use the webhook URL directly
+
+                }
+            }
+        }
+
+
         stage('feature') {
             when {
                 branch "feature"
@@ -246,47 +289,6 @@ pipeline {
             }
         }
 
-        stage('Office 365 Notification') {
-            when {
-                branch "development"
-            }
-            steps {
-                script {
-                    // Get build information
-                    def buildNumber = env.BUILD_NUMBER
-                    def buildStatus = currentBuild.currentResult ?: 'UNKNOWN'
-
-                    // Use the git step to get the committer's name
-                    def committerName = sh(script: 'git log -1 --pretty=format:%an', returnStdout: true).trim() ?: 'Unknown Committer'
-
-                    // Build remarks based on start time
-                    def remarks = "Started Jenkins pipeline by ${JENKINS_USERNAME}"
-
-
-
-                    // Get webhook URL from secret using withCredentials
-                    def webhookUrl
-                    withCredentials([string(credentialsId: 'FERTECH-CICD', variable: 'WEBHOOK_URL')]) {
-                        webhookUrl = env.WEBHOOK_URL
-                    }
-
-                    // Format message for Teams
-                    def teamsMessage = """
-                    Latest status of build #${buildNumber}
-                    **Status:** BUILD ${buildStatus}
-                    **Remarks:** ${remarks}
-                    **Committers:** ${committerName}
-                    **Developers:** ${committerName}
-                    """
-
-                    // Send message to Office 365 using webhook URL
-                    office365ConnectorSend message: teamsMessage.trim(),
-                    //status: 'SUCCESS', // Specify the status for success
-                    webhookUrl: webhookUrl // Use the webhook URL directly
-
-                }
-            }
-        }
 
     }
 
