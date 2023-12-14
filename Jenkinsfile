@@ -117,10 +117,10 @@ pipeline {
                          
 
                         // Run flutter doctor to check Flutter environment
-                        sh 'sudo /usr/local/flutter/bin/flutter pub get'
+                        sh ' /usr/local/flutter/bin/flutter pub get'
 
                         // Run flutter build appbundle
-                        sh 'sudo /usr/local/flutter/bin/flutter build apk'
+                        sh ' /usr/local/flutter/bin/flutter build apk'
 
                     }
 
