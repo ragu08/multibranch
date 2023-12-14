@@ -1,27 +1,28 @@
 pipeline {
     agent any
-    
+
     environment {
         FLUTTER_HOME = "/usr/local/flutter"
         ANDROID_SDK_ROOT = "/android-sdk"
         FIREBASE_SERVICE_ACCOUNT_KEY = credentials('FIREBASE_SERVICE_ACCOUNT_KEY')
         JENKINS_USERNAME = "Ragunath"
-        
-    }    
+
+    }
 
     stages{
-    
+
         stage('Checkout') {
-             when {
-                 branch "development"
+            when {
+                branch "development"
+            }
             steps {
                 script {
                     checkout scmGit(branches: [[name: 'development']], extensions: [], userRemoteConfigs: [[credentialsId: 'git', url: 'https://github.com/ragu08/Andorid_cicd.git']])
                 }
             }
-        }  
-    
-    
+        }
+
+
         stage('branch name') {
             steps {
                 echo "${env.BRANCH_NAME}"
@@ -103,32 +104,32 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Build Flutter App') {
-              when {
-                  branch  "development"
-              }
+            when {
+                branch  "development"
+            }
             steps {
                 script {
                     dir('/var/jenkins_home/workspace/MWS-FLUTTER/testing_cicd') {
 
-                    // Run flutter doctor to check Flutter environment
-                    sh '/usr/local/flutter/bin/flutter pub get'
+                        // Run flutter doctor to check Flutter environment
+                        sh '/usr/local/flutter/bin/flutter pub get'
 
-                    // Run flutter build appbundle
-                    sh '/usr/local/flutter/bin/flutter build apk'
-                    
+                        // Run flutter build appbundle
+                        sh '/usr/local/flutter/bin/flutter build apk'
+
                     }
 
                 }
             }
 
         }
-        
+
         stage('Distribute to Firebase') {
-             when {
-                 branch "development"  
-              }
+            when {
+                branch "development"
+            }
             steps {
                 script {
                     withCredentials([file(credentialsId: 'FIREBASE_SERVICE_ACCOUNT_KEY', variable: 'SERVICE_ACCOUNT_KEY')]) {
@@ -141,7 +142,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('feature') {
             when {
                 branch "feature"
@@ -244,11 +245,11 @@ pipeline {
                 }
             }
         }
-           
+
         stage('Office 365 Notification') {
-              when {
-                  branch "development"
-               }   
+            when {
+                branch "development"
+            }
             steps {
                 script {
                     // Get build information
@@ -285,8 +286,8 @@ pipeline {
 
                 }
             }
-        }   
-           
+        }
+
     }
 
 }
