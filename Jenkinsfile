@@ -111,7 +111,7 @@ pipeline {
             }
             steps {
                 script {
-                    dir('/var/jenkins_home/workspace/MWS-FLUTTER/testing_cicd') {        
+                    dir('/var/jenkins_home/workspace/demo-flutter_development') {        
 
                         // Run flutter doctor to check Flutter environment
                         sh 'sudo /usr/local/flutter/bin/flutter pub get'
