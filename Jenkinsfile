@@ -113,7 +113,7 @@ pipeline {
                 script {
                     dir('/var/jenkins_home/workspace/MWS-FLUTTER/testing_cicd') {
 
-                        git config --global --add safe.directory /usr/local/flutter                         
+                        chown -R jenkins:jenkins /usr/local/flutter                         
 
                         // Run flutter doctor to check Flutter environment
                         sh '/usr/local/flutter/bin/flutter pub get'
