@@ -111,16 +111,13 @@ pipeline {
             }
             steps {
                 script {
-                    dir('/var/jenkins_home/workspace/MWS-FLUTTER/testing_cicd') {
-
-                        sh 'git config --global --add safe.directory /usr/local/flutter'
-                         
+                    dir('/var/jenkins_home/workspace/MWS-FLUTTER/testing_cicd') {        
 
                         // Run flutter doctor to check Flutter environment
-                        sh ' /usr/local/flutter/bin/flutter pub get'
+                        sh 'sudo /usr/local/flutter/bin/flutter pub get'
 
                         // Run flutter build appbundle
-                        sh ' /usr/local/flutter/bin/flutter build apk'
+                        sh 'sudo  /usr/local/flutter/bin/flutter build apk'
 
                     }
 
