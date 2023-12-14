@@ -113,7 +113,8 @@ pipeline {
                 script {
                     dir('/var/jenkins_home/workspace/MWS-FLUTTER/testing_cicd') {
 
-                        chown -R jenkins:jenkins /usr/local/flutter                         
+                        sh 'sudo chown -R jenkins:jenkins /usr/local/flutter'
+                         
 
                         // Run flutter doctor to check Flutter environment
                         sh '/usr/local/flutter/bin/flutter pub get'
