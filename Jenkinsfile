@@ -29,7 +29,7 @@ pipeline {
                 sh '''
 
                 printenv
-                /root/.dotnet/tools/dotnet-gitversion /output buildserver
+                gitversion /repo
 
                 '''
 
@@ -63,7 +63,7 @@ pipeline {
                 sh '''
 
                 printenv
-                /root/.dotnet/tools/dotnet-gitversion /output buildserver
+                gitversion /repo
 
                 '''
 
@@ -98,7 +98,7 @@ pipeline {
                 sh '''
 
                 printenv
-                /root/.dotnet/tools/dotnet-gitversion /output buildserver
+                gitversion /repo
 
                 '''
 
@@ -132,7 +132,7 @@ pipeline {
                 sh '''
 
                 printenv
-                /root/.dotnet/tools/dotnet-gitversion /output buildserver
+                gitversion /repo
 
                 '''
 
@@ -167,7 +167,7 @@ pipeline {
                 sh '''
 
                 printenv
-                /root/.dotnet/tools/dotnet-gitversion /output buildserver
+                gitversion /repo
 
                 '''
 
