@@ -91,7 +91,7 @@ pipeline {
             }
 
             steps {
-                echo "${env.BRANCH_NAME}"
+l                echo "${env.BRANCH_NAME}"
                 echo "${BRANCH_NAME}"
 
 
@@ -131,8 +131,7 @@ pipeline {
 
                 sh '''
 
-                printenv
-                /root/.dotnet/tools/dotnet-gitversion /output buildserver
+                gitversion /repo
 
                 '''
 
