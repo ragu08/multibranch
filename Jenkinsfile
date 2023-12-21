@@ -98,7 +98,7 @@ pipeline {
                 sh '''
 
                 printenv
-                gitversion /repo
+                docker-compose run --rm gitversion /repo
 
                 '''
 
