@@ -61,12 +61,12 @@ branches:
     pre-release-weight: 30000
   bugfix:
     regex: bugfix(es)?[/-]
-    source-branches: ['development']
+    mode: ContinuousDelivery
     tag: ''
     increment: patch
     prevent-increment-of-merged-branch-version: false
     track-merge-target: false
-    source-branches: [ 'developement' ]
+    source-branches: [ 'development' ]
     tracks-release-branches: false
     is-release-branch: false
     is-mainline: false
