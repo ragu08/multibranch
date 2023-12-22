@@ -60,7 +60,7 @@ branches:
     is-mainline: false
     pre-release-weight: 30000
   bugfix:
-    regex: bugfix(es)?[/-]
+    regex: ^bugfix(es)?[/-]
     mode: ContinuousDelivery
     tag: ''
     increment: patch
