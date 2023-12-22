@@ -16,41 +16,31 @@ pipeline {
             }
         }
 
-        stage('main') {
+        stage('master') {
             when {
-                branch "main"
+                branch "master"
             }
 
             steps {
-                echo "${env.BRANCH_NAME}"
+                echo "${env.BRANCH_NAME}"/tmp/s
                 echo "${BRANCH_NAME}"
 
-
-                sh '''
-
-                printenv
-                gitversion /repo
-
-                '''
-
-                echo "This is MAIN Branch"
+                echo "This is MASTER Branch"
                 script {
 
-                    def props = readProperties file: 'gitversion.properties'
-                    env.GitVersion_SemVer = props.GitVersion_SemVer
-                    env.GitVersion_BranchName = props.GitVersion_BranchName
-                    env.GitVersion_AssemblySemVer = props.GitVersion_AssemblySemVer
-                    env.GitVersion_MajorMinorPatch = props.GitVersion_MajorMinorPatch
-                    env.GitVersion_Sha = props.GitVersion_Sha
-                    echo env.GitVersion_SemVer
-                    echo env.GitVersion_MajorMinorPatch
-                    echo env.GitVersion_FullSemVer
+                  // Run GitVersion
+                       def gitversionOutput = sh(script: 'docker run --rm -v $WORKSPACE:/repo gittools/gitversion:latest /repo /output buildserver /l debug', returnStdout: true).trim()
+                       echo "GitVersion Output: ${gitversionOutput}"
+                       echo env.GitVersion_SemVer
+                       echo env.GitVersion_MajorMinorPatch
+                      echo env.GitVersion_FullSemVer
+
 
                 }
             }
         }
 
-        stage('develop') {
+        stage('development') {
             when {
                 branch "development"
             }
@@ -59,26 +49,16 @@ pipeline {
                 echo "${env.BRANCH_NAME}"
                 echo "${BRANCH_NAME}"
 
-
-                sh '''
-
-                printenv
-                gitversion /repo
-
-                '''
-
                 echo "This is DEVELOPMENT Branch"
                 script {
 
-                    def props = readProperties file: 'gitversion.properties'
-                    env.GitVersion_SemVer = props.GitVersion_SemVer
-                    env.GitVersion_BranchName = props.GitVersion_BranchName
-                    env.GitVersion_AssemblySemVer = props.GitVersion_AssemblySemVer
-                    env.GitVersion_MajorMinorPatch = props.GitVersion_MajorMinorPatch
-                    env.GitVersion_Sha = props.GitVersion_Sha
-                    echo env.GitVersion_SemVer
-                    echo env.GitVersion_MajorMinorPatch
-                    echo env.GitVersion_FullSemVer
+                     // Run GitVersion
+                       def gitversionOutput = sh(script: 'docker run --rm -v $WORKSPACE:/repo gittools/gitversion:latest /repo /output buildserver /l debug', returnStdout: true).trim()
+                       echo "GitVersion Output: ${gitversionOutput}"
+                       echo env.GitVersion_SemVer
+                       echo env.GitVersion_MajorMinorPatch
+                      echo env.GitVersion_FullSemVer
+
 
                 }
             }
@@ -87,33 +67,23 @@ pipeline {
 
         stage('feature') {
             when {
-                branch "feature"
+                branch "feature/*"
             }
 
             steps {
                 echo "${env.BRANCH_NAME}"
                 echo "${BRANCH_NAME}"
 
-
-                sh '''
-
-                printenv
-                docker-compose run --rm gitversion /repo
-
-                '''
-
                 echo "This is FEATURE Branch"
                 script {
 
-                    def props = readProperties file: 'gitversion.properties'
-                    env.GitVersion_SemVer = props.GitVersion_SemVer
-                    env.GitVersion_BranchName = props.GitVersion_BranchName
-                    env.GitVersion_AssemblySemVer = props.GitVersion_AssemblySemVer
-                    env.GitVersion_MajorMinorPatch = props.GitVersion_MajorMinorPatch
-                    env.GitVersion_Sha = props.GitVersion_Sha
-                    echo env.GitVersion_SemVer
-                    echo env.GitVersion_MajorMinorPatch
-                    echo env.GitVersion_FullSemVer
+                    // Run GitVersion
+                       def gitversionOutput = sh(script: 'docker run --rm -v $WORKSPACE:/repo gittools/gitversion:latest /repo /output buildserver /l debug', returnStdout: true).trim()
+                       echo "GitVersion Output: ${gitversionOutput}"
+                       echo env.GitVersion_SemVer
+                       echo env.GitVersion_MajorMinorPatch
+                      echo env.GitVersion_FullSemVer
+
                 }
             }
         }
@@ -121,33 +91,22 @@ pipeline {
 
         stage('bugfix') {
             when {
-                branch "bugfix"
+                branch "bugfix/*"
             }
 
             steps {
                 echo "${env.BRANCH_NAME}"
                 echo "${BRANCH_NAME}"
 
-
-                sh '''
-
-                printenv
-                gitversion /repo
-
-                '''
-
-                echo "This is BUGFIX Branch"
                 script {
 
-                    def props = readProperties file: 'gitversion.properties'
-                    env.GitVersion_SemVer = props.GitVersion_SemVer
-                    env.GitVersion_BranchName = props.GitVersion_BranchName
-                    env.GitVersion_AssemblySemVer = props.GitVersion_AssemblySemVer
-                    env.GitVersion_MajorMinorPatch = props.GitVersion_MajorMinorPatch
-                    env.GitVersion_Sha = props.GitVersion_Sha
-                    echo env.GitVersion_SemVer
-                    echo env.GitVersion_MajorMinorPatch
-                    echo env.GitVersion_FullSemVer
+                    // Run GitVersion
+                       def gitversionOutput = sh(script: 'docker run --rm -v $WORKSPACE:/repo gittools/gitversion:latest /repo /output buildserver /l debug', returnStdout: true).trim()
+                       echo "GitVersion Output: ${gitversionOutput}"
+                       echo env.GitVersion_SemVer
+                       echo env.GitVersion_MajorMinorPatch
+                      echo env.GitVersion_FullSemVer
+
 
                 }
             }
@@ -156,7 +115,7 @@ pipeline {
 
         stage('release') {
             when {
-                branch "release"
+                branch "release/*"
             }
 
             steps {
@@ -164,25 +123,16 @@ pipeline {
                 echo "${BRANCH_NAME}"
 
 
-                sh '''
-
-                printenv
-                gitversion /repo
-
-                '''
-
                 echo "This is RELEASE Branch"
                 script {
 
-                    def props = readProperties file: 'gitversion.properties'
-                    env.GitVersion_SemVer = props.GitVersion_SemVer
-                    env.GitVersion_BranchName = props.GitVersion_BranchName
-                    env.GitVersion_AssemblySemVer = props.GitVersion_AssemblySemVer
-                    env.GitVersion_MajorMinorPatch = props.GitVersion_MajorMinorPatch
-                    env.GitVersion_Sha = props.GitVersion_Sha
-                    echo env.GitVersion_SemVer
-                    echo env.GitVersion_MajorMinorPatch
-                    echo env.GitVersion_FullSemVer
+                    // Run GitVersion
+                       def gitversionOutput = sh(script: 'docker run --rm -v $WORKSPACE:/repo gittools/gitversion:latest /repo /output buildserver /l debug', returnStdout: true).trim()
+                       echo "GitVersion Output: ${gitversionOutput}"
+                       echo env.GitVersion_SemVer
+                       echo env.GitVersion_MajorMinorPatch
+                      echo env.GitVersion_FullSemVer
+
 
                 }
             }
