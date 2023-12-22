@@ -67,7 +67,7 @@ pipeline {
 
         stage('feature') {
             when {
-                branch "feature/*"
+                branch "feature"
             }
 
             steps {
@@ -91,7 +91,7 @@ pipeline {
 
         stage('bugfix') {
             when {
-                branch "bugfix/*"
+                branch "bugfix"
             }
 
             steps {
@@ -115,7 +115,7 @@ pipeline {
 
         stage('release') {
             when {
-                branch "release/*"
+                branch "release"
             }
 
             steps {
