@@ -11,7 +11,7 @@ branches:
     is-release-branch: false
     is-mainline: true
     pre-release-weight: 55000
-  develop:
+  development:
     regex: ^dev(elop)?(ment)?$
     mode: ContinuousDeployment
     tag: alpha
@@ -60,7 +60,7 @@ branches:
     is-mainline: false
     pre-release-weight: 30000
   bugfix:
-    regex: bugfix(es)?[/-]
+    regex: ^bugfix(es)?[/-]
     mode: ContinuousDelivery
     tag: ''
     increment: patch
