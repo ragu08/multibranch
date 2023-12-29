@@ -2,7 +2,7 @@ mode: mainline
 branches:
   development:
     regex: ^dev(elop)?(ment)?$
-    mode: ContinuousDelivery
+    source-branches: [ 'main' ]
     tag: ''
   feature:
     regex: '^feature?[/-]'
