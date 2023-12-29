@@ -1,15 +1,17 @@
-mode: mainline
 branches:
   develop:
     regex: ^dev(elop)?(ment)?$
+    mode: ContinuousDeployment
     source-branches: [ 'main' ]
     tag: ''
   feature:
     regex: '^feature?[/-]'
+    mode: ContinuousDelivery
     source-branches: [ 'develop' ]
     tag: ''
   bugfix:
     regex: 'bugfix(es)?[/-]'
+    mode: ContinuousDelivery
     source-branches: [ 'develop' ]
     tag: ''
 ignore:
