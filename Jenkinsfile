@@ -28,12 +28,12 @@ pipeline {
                 echo "This is MASTER Branch"
                 script {
 
-                  // Run GitVersion
-                       def gitversionOutput = sh(script: 'docker run --rm -v $WORKSPACE:/repo gittools/gitversion:latest /repo /output buildserver /l debug', returnStdout: true).trim()
-                       echo "GitVersion Output: ${gitversionOutput}"
-                       echo env.GitVersion_SemVer
-                       echo env.GitVersion_MajorMinorPatch
-                      echo env.GitVersion_FullSemVer
+                    // Run GitVersion
+                    def gitversionOutput = sh(script: 'docker run --rm -v $WORKSPACE:/repo gittools/gitversion:latest /repo /output buildserver /l debug', returnStdout: true).trim()
+                    echo "GitVersion Output: ${gitversionOutput}"
+                    echo env.GitVersion_SemVer
+                    echo env.GitVersion_MajorMinorPatch
+                    echo env.GitVersion_FullSemVer
 
 
                 }
@@ -52,12 +52,12 @@ pipeline {
                 echo "This is DEVELOPMENT Branch"
                 script {
 
-                     // Run GitVersion
-                       def gitversionOutput = sh(script: 'docker run --rm -v $WORKSPACE:/repo gittools/gitversion:latest /repo /output buildserver /l debug', returnStdout: true).trim()
-                       echo "GitVersion Output: ${gitversionOutput}"
-                       echo env.GitVersion_SemVer
-                       echo env.GitVersion_MajorMinorPatch
-                      echo env.GitVersion_FullSemVer
+                    // Run GitVersion
+                    def gitversionOutput = sh(script: 'docker run --rm -v $WORKSPACE:/repo gittools/gitversion:latest /repo /output buildserver /l debug', returnStdout: true).trim()
+                    echo "GitVersion Output: ${gitversionOutput}"
+                    echo env.GitVersion_SemVer
+                    echo env.GitVersion_MajorMinorPatch
+                    echo env.GitVersion_FullSemVer
 
 
                 }
@@ -78,10 +78,10 @@ pipeline {
                 script {
 
                     // Run GitVersion
-                       // Specify the GitVersion Docker image and version
+                    // Specify the GitVersion Docker image and version
                     def gitversionImage = 'gittools/gitversion:5.6.6'
 
-                   // Run GitVersion and capture the output
+                    // Run GitVersion and capture the output
                     sh "docker run --rm -v ${WORKSPACE}:/repo ${gitversionImage} /repo "
 
 
@@ -97,7 +97,7 @@ pipeline {
 
                 }
             }
-         }
+        }
 
 
         stage('bugfix') {
@@ -105,52 +105,50 @@ pipeline {
                 branch "bugfix"
             }
 
-            
-                echo "${env.BRANCH_NAME}"
-                echo "${BRANCH_NAME}"
 
-                script {
+            echo "${env.BRANCH_NAME}"
+            echo "${BRANCH_NAME}"
 
-                    // Run GitVersion
-                       def gitversionOutput = sh(script: 'docker run --rm -v $WORKSPACE:/repo gittools/gitversion:latest /repo /output buildserver /l debug', returnStdout: true).trim()
-                       echo "GitVersion Output: ${gitversionOutput}"
-                       echo env.GitVersion_SemVer
-                       echo env.GitVersion_MajorMinorPatch
-                      echo env.GitVersion_FullSemVer
+            script {
+
+                // Run GitVersion
+                def gitversionOutput = sh(script: 'docker run --rm -v $WORKSPACE:/repo gittools/gitversion:latest /repo /output buildserver /l debug', returnStdout: true).trim()
+                echo "GitVersion Output: ${gitversionOutput}"
+                echo env.GitVersion_SemVer
+                echo env.GitVersion_MajorMinorPatch
+                echo env.GitVersion_FullSemVer
 
 
-                }
             }
         }
-
-
-        stage('release') {
-            when {
-                branch "release"
-            }
-
-            steps {
-                echo "${env.BRANCH_NAME}"
-                echo "${BRANCH_NAME}"
-
-
-                echo "This is RELEASE Branch"
-                script {
-
-                    // Run GitVersion
-                       def gitversionOutput = sh(script: 'docker run --rm -v $WORKSPACE:/repo gittools/gitversion:latest /repo /output buildserver /l debug', returnStdout: true).trim()
-                       echo "GitVersion Output: ${gitversionOutput}"
-                       echo env.GitVersion_SemVer
-                       echo env.GitVersion_MajorMinorPatch
-                      echo env.GitVersion_FullSemVer
-
-
-                }
-            }
-        }
-
-
     }
+
+
+    stage('release') {
+        when {
+            branch "release"
+        }
+
+        steps {
+            echo "${env.BRANCH_NAME}"
+            echo "${BRANCH_NAME}"
+
+
+            echo "This is RELEASE Branch"
+            script {
+
+                // Run GitVersion
+                def gitversionOutput = sh(script: 'docker run --rm -v $WORKSPACE:/repo gittools/gitversion:latest /repo /output buildserver /l debug', returnStdout: true).trim()
+                echo "GitVersion Output: ${gitversionOutput}"
+                echo env.GitVersion_SemVer
+                echo env.GitVersion_MajorMinorPatch
+                echo env.GitVersion_FullSemVer
+
+
+            }
+        }
+    }
+
 
 }
 
