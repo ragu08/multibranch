@@ -105,7 +105,7 @@ pipeline {
                 branch "bugfix"
             }
 
-
+          steps {
             echo "${env.BRANCH_NAME}"
             echo "${BRANCH_NAME}"
 
