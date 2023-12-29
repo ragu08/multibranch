@@ -6,12 +6,12 @@ branches:
     preventIncrementOfMergedBranchVersion: true
     trackMergeTarget: true
   development:
-    tag: 'alpha'
+    tag: ''
     increment: Minor
     preventIncrementOfMergedBranchVersion: false
     trackMergeTarget: false
   release:
-    tag: 'beta'
+    tag: ''
     increment: Patch
     preventIncrementOfMergedBranchVersion: false
     trackMergeTarget: false
