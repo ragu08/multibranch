@@ -1,5 +1,8 @@
 mode: mainline
 branches:
+  development:
+    mode: ContinuousDelivery
+    tag: ''
   feature:
     regex: '^feature?[/-]'
     source-branches: [ 'development' ]
