@@ -22,7 +22,7 @@ pipeline {
             }
 
             steps {
-                echo "${env.BRANCH_NAME}"/tmp/s
+                echo "${env.BRANCH_NAME}"
                 echo "${BRANCH_NAME}"
 
                 echo "This is MASTER Branch"
