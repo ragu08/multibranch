@@ -16,9 +16,9 @@ pipeline {
             }
         }
 
-        stage('master') {
+        stage('main') {
             when {
-                branch "master"
+                branch "main"
             }
 
             steps {
