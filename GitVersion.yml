@@ -6,7 +6,7 @@ branches:
     tag: ''
   feature:
     regex: '^feature?[/-]'
-    source-branches: [ 'development' ]
+    source-branches: [ 'develop' ]
     tag: ''
   bugfix:
     regex: 'bugfix(es)?[/-]'
