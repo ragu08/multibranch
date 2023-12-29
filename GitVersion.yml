@@ -1,11 +1,11 @@
 mode: mainline
 branches:
     feature:
-      regax: ^feature?[/-]
+      regex: ^feature?[/-]
       source-branches: ['development']
       tag: ''
      bugfix:
-       regax: bugfix(es)?[/-]
+       regex: bugfix(es)?[/-]
        source-branches: ['development']
        tag: ''
 ignore:
