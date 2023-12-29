@@ -1,6 +1,6 @@
 mode: mainline
 branches:
-  development:
+  develop:
     regex: ^dev(elop)?(ment)?$
     source-branches: [ 'main' ]
     tag: ''
