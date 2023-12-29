@@ -1,31 +1,13 @@
-mode: Mainline
+mode: mainline
 branches:
-  main:
-    tag: 'release'
-    increment: Major
-    preventIncrementOfMergedBranchVersion: true
-    trackMergeTarget: true
-  development:
-    tag: ''
-    increment: Minor
-    preventIncrementOfMergedBranchVersion: true
-    trackMergeTarget: false
-  release:
-    tag: ''
-    increment: Patch
-    preventIncrementOfMergedBranchVersion: false
-    trackMergeTarget: false
-  bugfix:
-    tag: ''
-    increment: Patch
-    preventIncrementOfMergedBranchVersion: false
-    trackMergeTarget: false
-  feature:
-    tag: ''
-    increment: Minor
-    preventIncrementOfMergedBranchVersion: false
-    trackMergeTarget: false
-
+    feature:
+      regax: ^feature?[/-]
+      source-branches: ['development']
+      tag: ''
+     bugfix:
+       regax: bugfix(es)?[/-]
+       source-branches: ['development']
+       tag: ''
 ignore:
   sha: []
 merge-message-formats: {}
