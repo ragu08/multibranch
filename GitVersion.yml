@@ -1,6 +1,7 @@
 mode: mainline
 branches:
   development:
+    regex: ^dev(elop)?(ment)?$
     mode: ContinuousDelivery
     tag: ''
   feature:
