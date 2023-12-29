@@ -10,7 +10,7 @@ branches:
     tag: ''
   bugfix:
     regex: 'bugfix(es)?[/-]'
-    source-branches: [ 'development' ]
+    source-branches: [ 'develop' ]
     tag: ''
 ignore:
   sha: []
