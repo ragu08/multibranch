@@ -2,15 +2,15 @@ mode: mainline
 branches:
   develop:
     regex: ^dev(elop)?(ment)?$
-    source-branches: [ 'main' ]
+    source-branches: ['main']
     tag: ''  # Ensure there is a space after tag:
   feature:
     regex: '^feature?[/-]'
-    source-branches: ['develop']  # Corrected from 'development'
+    source-branches: ['main']
     tag: ''
   bugfix:
     regex: 'bugfix(es)?[/-]'
-    source-branches: ['develop']  # Corrected from 'development'
+    source-branches: ['main']
     tag: ''
 ignore:
   sha: []
