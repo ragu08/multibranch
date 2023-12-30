@@ -6,11 +6,11 @@ branches:
     tag: ''  # Ensure there is a space after tag:
   feature:
     regex: '^feature?[/-]'
-    source-branches: ['main']
+    source-branches: ['main','develop']
     tag: ''
   bugfix:
     regex: 'bugfix(es)?[/-]'
-    source-branches: ['main']
+    source-branches: ['main','develop']
     tag: ''
 ignore:
   sha: []
