@@ -3,14 +3,14 @@ branches:
   develop:
     regex: ^dev(elop)?(ment)?$
     source-branches: [ 'main' ]
-    tag:''
+    tag: ''  # Ensure there is a space after tag:
   feature:
     regex: '^feature?[/-]'
-    source-branches: ['development']
+    source-branches: ['develop']  # Corrected from 'development'
     tag: ''
   bugfix:
     regex: 'bugfix(es)?[/-]'
-    source-branches: ['development']
+    source-branches: ['develop']  # Corrected from 'development'
     tag: ''
 ignore:
   sha: []
